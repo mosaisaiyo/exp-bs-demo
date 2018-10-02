@@ -23,12 +23,13 @@ var updateResult = function(res) {
 }
 
 var insertResult = function(res) {
+  console.log(JSON.stringify(res));
   return;
 }
 
 var dbConnected = function() {
   /** case definition **/
-  function case1() {
+  function find_sync() {
     //Batch 1
     var b = Batch.regBatch();
     b.execBody = function() {
@@ -49,72 +50,56 @@ var dbConnected = function() {
       MongoDB.disconnectDB();
     }
 
-    var findOpt_1 = {
-	dbName : 'local',
-	collection : 'customizing',
-	whereStr : {
-	  system : 'SAP'
-	}
-    };
+    var findOpt_1 = MongoDB.getFindOption('local', 'customizing', {system:'SAP'});
     MongoDB.findRec(findOpt_1, b.callback);
 
-    var findOpt_2 = {
-	dbName : 'local',
-	collection : 'customizing',
-	whereStr : {
-	  system : 'Node.js'
-	}
-    };
+    var findOpt_2 = MongoDB.getFindOption('local', 'customizing', {system:'Node.js'});
     MongoDB.findRec(findOpt_2, c.callback);
   }
 
-  function case2() {
-    var findOpt_1 = {
-	dbName : 'local',
-	collection : 'customizing',
-	whereStr : {
-	  system : 'SAP'
-	}
-    };
+  function find_async() {
+    var findOpt_1 = MongoDB.getFindOption('local', 'customizing', {system:'SAP'});
     MongoDB.findRec(findOpt_1, findResult);
 
-    var findOpt_2 = {
-	dbName : 'local',
-	collection : 'customizing',
-	whereStr : {
-	  system : 'JavaScript'
-	}
-    };
+    var findOpt_2 = MongoDB.getFindOption('local', 'customizing', {system:'Node.js'});
     MongoDB.findRec(findOpt_2, findResult);
   }
-
-  function case3() {
-    MongoDB.updateRec('local', 
-	'customizing', 
-	{system : 'JavaScript', name : 'USR_DEFLT'},
-	{$set: { list : ['UF050473', 'UF050474', 'UF050442']}},
-	updateResult);	
+  
+  function find_all() {
+    var findOpt = MongoDB.getFindOption('local', 'customizing', {});
+    MongoDB.findRec(findOpt, findResult);
   }
 
-  function case4() {
-    var insertOption = {
-	dbName : 'local',
-	collection : 'customizing',
-	data : {
-	  system: 'JavaScript',
-	  category: 'Configuration',
-	  name: 'NAME',
-	  value: 'VALUE',
-	  list: [],
-	  createTimestamp: null
-	}
-    }; 
+  function update_async() {
+    var updateOpt = MongoDB.getUpdateOption('local', 
+	                                    'customizing',
+	                                    { system : 'JavaScript',
+                                              name : 'Table' }, 
+                                            { $set : { 	list : [ 'T001', 'T001M', 'T001K' ]}});
+    updateOpt.updateStr.$set.createTimestamp = new Date().toString();
+    MongoDB.updateRec(updateOpt, updateResult);	
+  }
+
+  function insert_async() {
+    
+    var data = {
+	system: 'JavaScript',
+	category: 'Configuration',
+	name: 'NEW',
+	value: 'TBD',
+	list: [],
+	createTimestamp: null
+	}; 
+    var insertOption = MongoDB.getInsertOption('local', 'customizing', data);
     MongoDB.insertOne(insertOption, insertResult);
   }
 
   /** case run **/	
 
-  case1();
+  //find_sync();
+ // find_all();
+  update_async();
+ // insert_async();
 
 }
 
