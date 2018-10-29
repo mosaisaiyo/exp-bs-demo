@@ -34,14 +34,14 @@ var dbConnected = function() {
     var b = Batch.regBatch();
     b.execBody = function() {
       if (arguments.length===1) 
-	finalResult = finalResult.concat(arguments[0]);
+		finalResult = finalResult.concat(arguments[0]);
     }
 
     //Batch 2
     var c = Batch.regBatch();
     c.execBody = function() {
       if (arguments.length===1) 
-	finalResult = finalResult.concat(arguments[0]);
+		finalResult = finalResult.concat(arguments[0]);
     }
 
     //Batch finalize
@@ -97,9 +97,9 @@ var dbConnected = function() {
   /** case run **/	
 
   //find_sync();
- // find_all();
+  //find_all();
   update_async();
- // insert_async();
+  // insert_async();
 
 }
 

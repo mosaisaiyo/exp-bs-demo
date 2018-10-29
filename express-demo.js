@@ -7,6 +7,7 @@ const mongoTool = require(findPath+'/myMongoTool');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var ObjectID = require('mongodb').ObjectID;
 
 var easyMongo = new mongoTool();
 
@@ -18,16 +19,6 @@ app.get('/', function(req, res) {
   console.log('get executed!');
 });
 
-app.get('/Book(:id)', function(req, res) {
-  res.send('Good');
-  console.log('get Book!');
-});
-
-app.get('/Book', function(req, res) {
-  res.json(req.query);
-  console.log('get Book!');
-});
-
 var checkConnection = function (req, res, next) {
   function f() {
     if(typeof next==='function') next();
@@ -36,7 +27,7 @@ var checkConnection = function (req, res, next) {
   console.log('check mongo connection!');
 }
 
-var searchData = function (req, res, next) {
+var bySystem = function (req, res, next) {
   function findResult(result) {
     res.findResult = result;
     if(typeof next==='function') next();
@@ -46,7 +37,21 @@ var searchData = function (req, res, next) {
     findOpt.whereStr.system = req.params.system;
     easyMongo.findRec(findOpt, findResult);
   }
-    
+
+  console.log('search data!');
+}
+
+var byId = function (req, res, next) {
+  function findResult(result) {
+    res.findResult = result;
+    if(typeof next==='function') next();
+  }
+  if (req.params && req.params.id) {
+    var findOpt = easyMongo.getFindOption('local', 'customizing', {_id:''});
+    findOpt.whereStr._id = ObjectID(req.params.id);
+    easyMongo.findRec(findOpt, findResult);
+  }
+
   console.log('search data!');
 }
 
@@ -55,8 +60,8 @@ var responseResult = function (req, res) {
   console.log('response find result!');
 }
 
-app.get('/:system', [checkConnection, searchData, responseResult]);
-
+app.get('/id/:id', [checkConnection, byId, responseResult]);
+app.get('/system/:system', [checkConnection, bySystem, responseResult]);
 
 app.post('/', function(req, res) {
   res.json({say:'Hello World'});
