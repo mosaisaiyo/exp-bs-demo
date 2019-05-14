@@ -14,9 +14,17 @@
 <!-- Bootstrap -->
 <link href="/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link href="/stylesheets/style.css" rel="stylesheet">
-
+<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
 </head>
-<body>
+
+<script>
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope) {
+    $scope.objName = "Toolkit:LayoutIt(Haha...)!";
+  });
+</script>
+
+<body ng-app="myApp" ng-controller="myCtrl">
 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script src="/jquery-3.4.1/jquery.min.js"></script>
@@ -26,9 +34,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="page-header">
+				<div class="page-header" ng-model="objName">
 					<h1>
-						LayoutIt! <small>Interface Builder for Bootstrap</small>
+						{{objName}} <small>Interface Builder for Bootstrap</small>
 					</h1>
 				</div>
 				<div class="jumbotron">
@@ -53,7 +61,7 @@
 		</div>
 		<div class="progress">
 			<div class="progress-bar progress-bar-info" role="progressbar"
-				aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+				aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
 				style="width: 20%">
 				<span class="sr-only">20% Complete</span>
 			</div>
@@ -146,8 +154,6 @@
 
 	</div>
 
-
-
 	<div class="container">
 		<div class="col-xs-4">
 			<img src="/images/happiness.jpg" alt="Responsive image"
@@ -163,6 +169,6 @@
 		</div>
 	</div>
 
-
 </body>
+
 </html>
