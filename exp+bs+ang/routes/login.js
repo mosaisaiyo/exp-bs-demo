@@ -1,14 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res) {
-
+router.get('/home', function (req, res, next) {
+    if (!req.session.user) {
+        req.session.error = '请先登陆';
+        return res.redirect('/login');
+    }
+    next();
 });
 
 router.get('/home', function (req, res) {
     var user = {
-        username: 'admin',
-        password: 'admin'
+        username: 'guest',
+        password: 'tbd'
     }
     res.render('home', { title: 'Home', user: user });
 });
