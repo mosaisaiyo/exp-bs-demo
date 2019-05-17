@@ -3,23 +3,44 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
+var expSession = require('express-session');
 var logger = require('morgan');
+var ejs = require('ejs');
+/*--
+var sessionStore = require("session-mongoose")(express);
 
+var store = new sessionStore({
+  url: "mongodb://localhost/session",
+  interval: 120000
+}); --*/
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var demoRouter = require('./routes/demo');
 var dataRouter = require('./routes/data');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('.html', ejs.__express);
+app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+//app.use(express.methodOverride());
 app.use(cookieParser());
+app.use(cookieSession({ secret: 'mosaisaiyo' }));
+app.use(expSession({
+  secret: 'mosaisaiyo',
+  cookie: { maxAge: 900000 }
+}));
+app.use(function (req, res, next) {
+  res.locals.user = req.session.user;
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +51,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/demo', demoRouter);
 app.use('/data', dataRouter);
+app.use('/portal', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

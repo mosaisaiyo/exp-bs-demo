@@ -5,7 +5,7 @@
 var app=require("express")();
 //接收来自用户的任何请求
 app.use(function(req,res){
-    res.write("The response from server");
+    res.write("云服务，助力企业成功！");
     res.end();
 });
 
