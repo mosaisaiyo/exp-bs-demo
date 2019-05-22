@@ -20,7 +20,7 @@
 <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
 <script src="/controller/leaveRecord.js"></script>
 
-<body ng-app="leaveReqApp">
+<body ng-app="leaveReqApp" ng-controller="recordCtrl">
 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script src="/jquery-3.4.1/jquery.min.js"></script>
@@ -40,30 +40,32 @@
 		<div class="row">
 			<div class="col-xs-3">
 				<label>Leave Data Overview</label>
-				<button class="btn btn-primary btn-sm">Create New Leave
+				<button ng-click="createLeave()" class="btn btn-primary btn-sm">Create New Leave
 					Request</button>
 			</div>
 
-			<div class="col-xs-12" ng-controller="recordCtrl">
+			<div class="col-xs-12">
 				<table class="table table-bordered table-condensed table-hover">
 					<thead>
 						<tr class="info">
-							<td width="4%">actions</td>
-							<td width="9.6%">type of leave</td>
-							<td width="9.6%">start date</td>
-							<td width="9.6%">end date</td>
-							<td width="9.6%">processor</td>
-							<td width="9.6%">original type</td>
-							<td width="9.6%">original start</td>
-							<td width="9.6%">original end</td>
-							<td width="9.6%">status</td>
-							<td width="9.6%">lines for notes</td>
-							<td width="9.6%">used</td>
+							<td width="10%">actions</td>
+							<td width="9.%">type of leave</td>
+							<td width="9.%">start date</td>
+							<td width="9.%">end date</td>
+							<td width="9.%">processor</td>
+							<td width="9.%">original type</td>
+							<td width="9.%">original start</td>
+							<td width="9.%">original end</td>
+							<td width="9.%">status</td>
+							<td width="9.%">lines for notes</td>
+							<td width="9.%">used</td>
 						</tr>
 					</thead>
 					<tr ng-repeat="rec in leaveRecord">
-						<td align="center"><span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span></td>
+						<td align="center">
+							<button class="btn btn-info btn-xs" ng-click="editRec(rec.id)"><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbspEdit</button>
+							<button class="btn btn-danger btn-xs" ng-click="removeRec(rec.id)"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbspRemove</button>
+						</td>
 						<td>{{rec.act_type}}</td>
 						<td>{{rec.start_date}}</td>
 						<td>{{rec.end_date}}</td>

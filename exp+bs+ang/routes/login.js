@@ -4,7 +4,7 @@ var router = express.Router();
 router.get('/home', function (req, res, next) {
     if (!req.session.user) {
         req.session.error = '请先登陆';
-        return res.redirect('/login');
+        return res.redirect('/portal/login');
     }
     next();
 });
@@ -35,7 +35,7 @@ router.post('/login', function (req, res) {
 });
 
 router.get('/logout', (req, res) => {
-    res.redirect('http://127.0.0.1:3000');
+    res.redirect('../');
 });
 
 module.exports = router;
