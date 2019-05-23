@@ -7,9 +7,9 @@ angular.module('leaveReqApp', []).controller('recordCtrl',
 		$scope.createLeave = function () {
 			$http({
 				method: 'GET',
-				url: '/data/leaverec'
+				url: '/data/leaverec?action=new'
 			}).then(function successCallback(response) {
-				response.data["id"]=$scope.leaveRecord.length + 1;
+				//response.data["id"]=$scope.leaveRecord.length + 1;
 				$scope.leaveRecord.push(response.data);
 			}, function errorCallback(response) {
 				// 请求失败执行代码
@@ -20,7 +20,7 @@ angular.module('leaveReqApp', []).controller('recordCtrl',
 		$scope.removeRec = function(id) {
 			var recTemp = [];
 			for(var i=0;i<$scope.leaveRecord.length;i++) {
-				if(i!=(id-1))
+				if($scope.leaveRecord[i]["id"]!=id)
 					recTemp.push($scope.leaveRecord[i]);
 			}
 			$scope.leaveRecord = recTemp;
@@ -30,7 +30,7 @@ angular.module('leaveReqApp', []).controller('recordCtrl',
 		$scope.editRec = function(id) {
 			var recTemp = [];
 			for(var i=0;i<$scope.leaveRecord.length;i++) {
-				if(i==(id-1))
+				if($scope.leaveRecord[i]["id"]==id)
 					$scope.leaveRecord[i]["status"]="Modified";
 			}
 		} 
@@ -38,75 +38,11 @@ angular.module('leaveReqApp', []).controller('recordCtrl',
 		/*-- 初始化表格 --*/
 		$http({
 			method: 'GET',
-			url: '/data/leaverec'
+			url: '/data/leaverec?action=init'
 		}).then(function successCallback(response) {
-			$scope.leaveRecord = [{
-				id: '1',
-				action: '',
-				act_type: 'Annual Leave',
-				start_date: '2019.04.29',
-				end_date: '2019.04.30',
-				processor: 'EChao',
-				ori_type: '',
-				ori_start: '',
-				ori_end: '',
-				status: 'post',
-				notes: '',
-				used: '2 days'
-			}, {
-				id: '2',
-				action: '',
-				act_type: 'Sick Leave(Full Pay)',
-				start_date: '2019.04.15',
-				end_date: '2019.04.15',
-				processor: 'EChao',
-				ori_type: '',
-				ori_start: '',
-				ori_end: '',
-				status: 'post',
-				notes: '',
-				used: '1 days'
-			}, {
-				id: '3',
-				action: '',
-				act_type: 'Annual Leave',
-				start_date: '2019.04.04',
-				end_date: '2019.04.04',
-				processor: 'EChao',
-				ori_type: '',
-				ori_start: '',
-				ori_end: '',
-				status: 'post',
-				notes: '',
-				used: '1 days'
-			}, {
-				id: '4',
-				action: '',
-				act_type: 'Annual Leave',
-				start_date: '2019.03.14',
-				end_date: '2019.03.15',
-				processor: 'EChao',
-				ori_type: '',
-				ori_start: '',
-				ori_end: '',
-				status: 'post',
-				notes: '',
-				used: '2 days'
-			}, {
-				id: '5',
-				action: '',
-				act_type: 'Conpassionate Leave',
-				start_date: '2019.03.11',
-				end_date: '2019.03.13',
-				processor: 'EChao',
-				ori_type: '',
-				ori_start: '',
-				ori_end: '',
-				status: 'post',
-				notes: '',
-				used: ''
-			}];
-
+			$scope.leaveRecord = [];
+			for(var i=0;i<response.data.length;i++)
+				$scope.leaveRecord.push(response.data[i]);
 		}, function errorCallback(response) {
 			// 请求失败执行代码
 		});
