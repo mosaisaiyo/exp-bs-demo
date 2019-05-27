@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Display like SAP UI5</title>
+
+	<meta name="description" content="Source code generated using layoutit.com">
+	<meta name="author" content="LayoutIt!">
+
+	<!-- Bootstrap -->
+	<link href="/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+	<style>
+		.vertical-align {
+			display:flex;
+			align-items: baseline
+		}
+		.vertical-align .top {
+			align-self: baseline;
+		}
+		.vertical-align .center {
+			align-self: center
+		}
+		.available {
+			color: green;
+			font-weight:bold;
+		}
+		.discountinued {
+			color: red;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+	<script src="/jquery-3.4.1/jquery.min.js"></script>
+	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+	<script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+	<script src="/jquery-3.4.1/jquery.js"></script>
+	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+	<script src="/bootstrap-3.3.7/js/bootstrap.js"></script>
+
+	<div class="container">
+		<div class="list-group">
+			<button type="button" class="list-group-item">
+				<div class="row vertical-align">
+					<div class="col-sm-8 top">
+						<h4> Top label</h4>
+						<p>10 boxes at 20 bages</p>
+					</div>
+					<div class="col-sm-3 text-right top">
+						<h4>99.99
+							<small class="text-muted">EUR</small>
+						</h4>
+						<p class="discountinued">Available</p>
+					</div>
+					<div class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></div>
+				</div>
+			</button>
+		</div>
+	</div>
+
+</body>
+
+</html>

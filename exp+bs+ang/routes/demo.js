@@ -17,4 +17,8 @@ router.get('/welcome', (req, res) => {
   res.render('bs-welcome', {});
 });
 
+router.get('/sapui5', (req, res) => {
+  res.render('bs-sapui5', {});
+});
+
 module.exports = router;
