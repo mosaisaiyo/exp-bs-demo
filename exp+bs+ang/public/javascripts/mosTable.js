@@ -116,8 +116,15 @@ define([], function() {
                         }
                         o_tr[0]["_moskey"] = l_modal["items"][i]["_moskey"];
                         o_tr[0]["_mosdata"] = l_modal["items"][i];
+                        var idx = 0;
                         for (var col in l_modal["column"]) {
-                            l_html = '<td>' + l_modal["items"][i][col] + '</td>';
+
+                            idx++;
+                            if (idx == 1) {
+                                l_html = '<td><button moscomp="mosBtn" class="btn btn-primary btn-sm">' + l_modal["items"][i][col] + '</button></td>';
+
+                            } else
+                                l_html = '<td>' + l_modal["items"][i][col] + '</td>';
                             o_tr.append(l_html);
                         }
                     }

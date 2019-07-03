@@ -114,6 +114,10 @@ define('leaveRec', ['angular', 'mosTable'], function(angular, mosTable) {
         function pageResize() {
             return;
         }
+
+        function colBtn(p) {
+            console.log(p);
+        }
     }]);
 
     return app;
