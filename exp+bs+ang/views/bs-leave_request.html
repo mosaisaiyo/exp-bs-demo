@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Bootstrap 4, Demo by Ryan!</title>
+    <title>Bootstrap 4, Demo by Ryan!</title>
 
-	<meta name="description" content="Source code generated using layoutit.com">
-	<meta name="author" content="LayoutIt!">
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
 
-	<!-- Bootstrap -->
-	<link href="/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/stylesheets/style.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
 
 </head>
 
@@ -21,167 +21,167 @@
 <!-- <script src="/controller/leaveRecord.js"></script> -->
 <!-- <script src="/javascripts/mosTable.js"></script> -->
 
-<script src="/javascripts/require.js" defer async="true" data-main="/controller/main"></script>
+<script src="/javascripts/require.js" defer async="true" data-main="/javascripts/main"></script>
 
 <body ng-controller="recordCtrl">
-<!-- ng-app="leaveReqApp" -->
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<!-- <script src="/jquery-3.4.1/jquery.min.js"></script> -->
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<!-- <script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script> -->
+    <!-- ng-app="leaveReqApp" -->
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <!-- <script src="/jquery-3.4.1/jquery.min.js"></script> -->
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <!-- <script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script> -->
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="page-header">
-					<h3>Leave Overview</h3>
-				</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h3>Leave Overview</h3>
+                </div>
 
-			</div>
-		</div>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-3">
-				<label>Leave Data Overview</label>
-				<button ng-click="createLeave()" class="btn btn-primary btn-sm">Create New Leave
+        <div class="row">
+            <div class="col-xs-3">
+                <label>Leave Data Overview</label>
+                <button ng-click="createLeave()" class="btn btn-primary btn-sm">Create New Leave
 					Request</button>
-			</div>
+            </div>
 
-			<div class="col-xs-12">
-				<table class="table table-bordered table-condensed table-hover">
-					<thead>
-						<tr id="leaveRecordCol" class="info">
-							<td width="10%">actions</td>
-							<td width="9.%">type of leave</td>
-							<td width="9.%">start date</td>
-							<td width="9.%">end date</td>
-							<td width="9.%">processor</td>
-							<td width="9.%">original type</td>
-							<td width="9.%">original start</td>
-							<td width="9.%">original end</td>
-							<td width="9.%">status</td>
-							<td width="9.%">lines for notes</td>
-							<td width="9.%">used</td>
-						</tr>
-					</thead>
-					<tr id="leaveRecordRow" ng-repeat="rec in leaveRecord">
-						<td align="center">
-							<button class="btn btn-info btn-xs" ng-click="editRec(rec.id)"><span
+            <div class="col-xs-12">
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr id="leaveRecordCol" class="info">
+                            <td width="10%">actions</td>
+                            <td width="9.%">type of leave</td>
+                            <td width="9.%">start date</td>
+                            <td width="9.%">end date</td>
+                            <td width="9.%">processor</td>
+                            <td width="9.%">original type</td>
+                            <td width="9.%">original start</td>
+                            <td width="9.%">original end</td>
+                            <td width="9.%">status</td>
+                            <td width="9.%">lines for notes</td>
+                            <td width="9.%">used</td>
+                        </tr>
+                    </thead>
+                    <tr id="leaveRecordRow" ng-repeat="rec in leaveRecord">
+                        <td align="center">
+                            <button class="btn btn-info btn-xs" ng-click="editRec(rec.id)"><span
 									class="glyphicon glyphicon-pencil"></span>&nbsp&nbspEdit</button>
-							<button class="btn btn-danger btn-xs" ng-click="removeRec(rec.id)"><span
+                            <button class="btn btn-danger btn-xs" ng-click="removeRec(rec.id)"><span
 									class="glyphicon glyphicon-trash"></span>&nbsp&nbspRemove</button>
-						</td>
-						<td>{{rec.act_type}}</td>
-						<td>{{rec.start_date}}</td>
-						<td>{{rec.end_date}}</td>
-						<td>{{rec.processor}}</td>
-						<td>{{rec.ori_type}}</td>
-						<td>{{rec.ori_start}}</td>
-						<td>{{rec.ori_end}}</td>
-						<td>{{rec.status}}</td>
-						<td>{{rec.notes}}</td>
-						<td>{{rec.used}}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+                        </td>
+                        <td>{{rec.act_type}}</td>
+                        <td>{{rec.start_date}}</td>
+                        <td>{{rec.end_date}}</td>
+                        <td>{{rec.processor}}</td>
+                        <td>{{rec.ori_type}}</td>
+                        <td>{{rec.ori_start}}</td>
+                        <td>{{rec.ori_end}}</td>
+                        <td>{{rec.status}}</td>
+                        <td>{{rec.notes}}</td>
+                        <td>{{rec.used}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<label>Time Account Overview</label>
-			</div>
-			<div class="col-xs-12">
-				<table class="table table-bordered table-condensed table-hover">
-					<thead>
-						<tr class="info">
-							<td width="14.29%">Time Account</td>
-							<td width="14.29%">Deduction from</td>
-							<td width="14.29%">Deduction to</td>
-							<td width="14.29%">Entitlement</td>
-							<td width="14.29%">Used</td>
-							<td width="14.29%">Planed</td>
-							<td width="14.29%">Entitlement Minus Planed</td>
-						</tr>
-					</thead>
-					<tr>
-						<td>AL (Company Welfare)</td>
-						<td>2019.01.01</td>
-						<td>2019.12.31</td>
-						<td>9 days</td>
-						<td>0 days</td>
-						<td>0 days</td>
-						<td>9 days</td>
-					</tr>
-					<tr>
-						<td>AL (Statutory)</td>
-						<td>2019.01.01</td>
-						<td>2019.12.31</td>
-						<td>10 days</td>
-						<td>5 days</td>
-						<td>0 days</td>
-						<td>5 days</td>
-					</tr>
-					<tr>
-						<td>Sick Leave(Full Pay)</td>
-						<td>2019.01.01</td>
-						<td>2019.12.31</td>
-						<td>15 days</td>
-						<td>4 days</td>
-						<td>0 days</td>
-						<td>11 days</td>
-					</tr>
-					<tr>
-						<td>Wellness Day Leave</td>
-						<td>2019.01.01</td>
-						<td>2019.12.31</td>
-						<td>0.5 days</td>
-						<td>0 days</td>
-						<td>0 days</td>
-						<td>0.5 days</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Time Account Overview</label>
+            </div>
+            <div class="col-xs-12">
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr class="info">
+                            <td width="14.29%">Time Account</td>
+                            <td width="14.29%">Deduction from</td>
+                            <td width="14.29%">Deduction to</td>
+                            <td width="14.29%">Entitlement</td>
+                            <td width="14.29%">Used</td>
+                            <td width="14.29%">Planed</td>
+                            <td width="14.29%">Entitlement Minus Planed</td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>AL (Company Welfare)</td>
+                        <td>2019.01.01</td>
+                        <td>2019.12.31</td>
+                        <td>9 days</td>
+                        <td>0 days</td>
+                        <td>0 days</td>
+                        <td>9 days</td>
+                    </tr>
+                    <tr>
+                        <td>AL (Statutory)</td>
+                        <td>2019.01.01</td>
+                        <td>2019.12.31</td>
+                        <td>10 days</td>
+                        <td>5 days</td>
+                        <td>0 days</td>
+                        <td>5 days</td>
+                    </tr>
+                    <tr>
+                        <td>Sick Leave(Full Pay)</td>
+                        <td>2019.01.01</td>
+                        <td>2019.12.31</td>
+                        <td>15 days</td>
+                        <td>4 days</td>
+                        <td>0 days</td>
+                        <td>11 days</td>
+                    </tr>
+                    <tr>
+                        <td>Wellness Day Leave</td>
+                        <td>2019.01.01</td>
+                        <td>2019.12.31</td>
+                        <td>0.5 days</td>
+                        <td>0 days</td>
+                        <td>0 days</td>
+                        <td>0.5 days</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-xs-12">
-				<label>jQuery Demo Area</label>
-				<button ng-click="initClick()" class="btn btn-primary btn-sm">Init Event</button>
-				<button ng-click="refreshClick()" class="btn btn-primary btn-sm">Refresh Event</button>
-			</div>
-			<div class=" col-xs-12">
-				<table moscomp="mos_tab" mosdata="tabdata" class="table table-bordered table-condensed table-hover">
-					<thead>
-						<tr class="info">
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-						</tr>
-					</tbody>
-					<tfoot>
+        <div class="row">
+            <div class="col-xs-12">
+                <label>jQuery Demo Area</label>
+                <button ng-click="initClick()" class="btn btn-primary btn-sm">Init Event</button>
+                <button ng-click="refreshClick()" class="btn btn-primary btn-sm">Refresh Event</button>
+            </div>
+            <div class=" col-xs-12">
+                <table moscomp="mos_tab" mosdata="itcomp" class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr class="info">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                    <tfoot>
 
-					</tfoot>
-				</table>
-			</div>
-			<div class=" col-xs-6">
-				<table moscomp="mos_tab" mosdata="weather" class="table table-bordered table-condensed table-hover">
-					<thead>
-						<tr class="info">
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-						</tr>
-					</tbody>
-					<tfoot>
+                    </tfoot>
+                </table>
+            </div>
+            <div class=" col-xs-6">
+                <table moscomp="mos_tab" mosdata="weather" class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr class="info">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                    <tfoot>
 
-					</tfoot>
-				</table>
-			</div>
-		</div>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </body>
 
 </html>

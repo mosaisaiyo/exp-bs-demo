@@ -3,10 +3,10 @@ require.config({
         'jquery': '../jquery-3.4.1/jquery.min',
         'bootstrap': '../bootstrap-3.3.7/js/bootstrap.min',
         'angular': '../angular-1.4.6/angular.min',
-        'leaveRec': 'leaveRecord',
-        'mosTable': '../javascripts/mosTable',
-        'boot': 'bootstrap',
-        'domReady': '../javascripts/domReady',
+        'leaveRec': '../controller/leaveRecord',
+        'mosTable': 'mosTable',
+        'boot': 'boot',
+        'domReady': 'domReady',
     },
     shim: {
         'angular': {
@@ -32,6 +32,6 @@ require.config({
 
 }); */
 
-require(['angular', 'leaveRec'], function (angular, leaveRec) {
-
+require(['angular', 'leaveRec'], function(angular, leaveRec) {
+    console.info(angular.version);
 });

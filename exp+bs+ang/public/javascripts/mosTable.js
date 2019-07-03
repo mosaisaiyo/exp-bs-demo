@@ -1,10 +1,16 @@
 /** moTable version 0.18
  *  This component can be easily help you to render <table> element in Bootstrap Page
  */
-define([], function () {
-    var mosTable = function () {
-        this.oData = {}
-        this.uuid = function () {
+define([], function() {
+    var mosTable = function() {
+
+        this.initOData = function() {
+            return { temp: { column: {}, items: [] } };
+        }
+
+        this.oData = this.initOData();
+
+        this.uuid = function() {
             var s = [];
             var hexDigits = "0123456789abcdef";
             for (var i = 0; i < 36; i++) {
@@ -18,8 +24,8 @@ define([], function () {
             return uuid;
         }
 
-        this.setModal = function (n, d) {
-            this.oData = {};
+        this.setModal = function(n, d) {
+            this.oData = this.initOData();
             this.modalName = n;
             this.oData[n] = d;
             for (var i = 0; i < this.oData[n]["items"].length; i++) {
@@ -27,11 +33,11 @@ define([], function () {
             }
         }
 
-        this.getModal = function (n) {
+        this.getModal = function(n) {
             return this.oData[n];
         }
 
-        this.refreshTableBody = function (n) {
+        this.refreshTableBody = function(n) {
             var ui_tables = $("table[moscomp='mos_tab']");
             for (var i = 0; i < ui_tables.length; i++) {
                 var ui_table = ui_tables.eq(i);
@@ -39,7 +45,7 @@ define([], function () {
                     var ui_body = ui_table.children().eq(1);
                     ui_body.empty();
                     ui_body.append('<tr></tr>');
-                    (function (o, m) {
+                    (function(o, m) {
                         var l_html = "";
                         if (o.children().eq(1)[0].tagName == "TBODY") {
                             for (var i = 0; i < m["items"].length; i++) {
@@ -61,23 +67,28 @@ define([], function () {
             }
         }
 
-        this.init = function (n) {
+        this.init = function(name, data) {
+
             if (this._ui_object) {
                 return;
             }
 
-			var o = undefined;
-			for(var i=0;i<n.length;i++) {
-				if(n.eq(i).attr('mosdata')==this.modalName) {
-					o = n.eq(i);
-					break;
-				}
-			}
+            this.setModal(name, data);
 
-			if(o==undefined) return;
+            var n = $("table[moscomp='mos_tab']");
+            var o = undefined;
 
-            var l_mosdata = o.attr("mosdata");
-            var l_modal = this.getModal(l_mosdata);
+            for (var i = 0; i < n.length; i++) {
+                if (n.eq(i).attr('mosdata') == this.modalName) {
+                    o = n.eq(i);
+                    break;
+                }
+            }
+
+            if (o == undefined) return;
+
+            var l_data = o.attr("mosdata");
+            var l_modal = this.getModal(l_data);
             var l_html = "";
 
             this._ui_object = o;
