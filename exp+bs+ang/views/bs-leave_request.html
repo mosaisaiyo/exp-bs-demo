@@ -17,15 +17,18 @@
 
 </head>
 
-<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
-<script src="/controller/leaveRecord.js"></script>
+<!-- <script src="/angular-1.4.6/angular.min.js"></script> -->
+<!-- <script src="/controller/leaveRecord.js"></script> -->
+<!-- <script src="/javascripts/mosTable.js"></script> -->
 
-<body ng-app="leaveReqApp" ng-controller="recordCtrl">
+<script src="/javascripts/require.js" defer async="true" data-main="/controller/main"></script>
 
+<body ng-controller="recordCtrl">
+<!-- ng-app="leaveReqApp" -->
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script src="/jquery-3.4.1/jquery.min.js"></script>
+	<!-- <script src="/jquery-3.4.1/jquery.min.js"></script> -->
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<!-- <script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script> -->
 
 	<div class="container-fluid">
 		<div class="row">
@@ -47,7 +50,7 @@
 			<div class="col-xs-12">
 				<table class="table table-bordered table-condensed table-hover">
 					<thead>
-						<tr class="info">
+						<tr id="leaveRecordCol" class="info">
 							<td width="10%">actions</td>
 							<td width="9.%">type of leave</td>
 							<td width="9.%">start date</td>
@@ -61,10 +64,12 @@
 							<td width="9.%">used</td>
 						</tr>
 					</thead>
-					<tr ng-repeat="rec in leaveRecord">
+					<tr id="leaveRecordRow" ng-repeat="rec in leaveRecord">
 						<td align="center">
-							<button class="btn btn-info btn-xs" ng-click="editRec(rec.id)"><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbspEdit</button>
-							<button class="btn btn-danger btn-xs" ng-click="removeRec(rec.id)"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbspRemove</button>
+							<button class="btn btn-info btn-xs" ng-click="editRec(rec.id)"><span
+									class="glyphicon glyphicon-pencil"></span>&nbsp&nbspEdit</button>
+							<button class="btn btn-danger btn-xs" ng-click="removeRec(rec.id)"><span
+									class="glyphicon glyphicon-trash"></span>&nbsp&nbspRemove</button>
 						</td>
 						<td>{{rec.act_type}}</td>
 						<td>{{rec.start_date}}</td>
@@ -137,6 +142,45 @@
 				</table>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<label>jQuery Demo Area</label>
+				<button ng-click="initClick()" class="btn btn-primary btn-sm">Init Event</button>
+				<button ng-click="refreshClick()" class="btn btn-primary btn-sm">Refresh Event</button>
+			</div>
+			<div class=" col-xs-12">
+				<table moscomp="mos_tab" mosdata="tabdata" class="table table-bordered table-condensed table-hover">
+					<thead>
+						<tr class="info">
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						</tr>
+					</tbody>
+					<tfoot>
+
+					</tfoot>
+				</table>
+			</div>
+			<div class=" col-xs-6">
+				<table moscomp="mos_tab" mosdata="weather" class="table table-bordered table-condensed table-hover">
+					<thead>
+						<tr class="info">
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						</tr>
+					</tbody>
+					<tfoot>
+
+					</tfoot>
+				</table>
+			</div>
+		</div>
+
 	</div>
 </body>
 

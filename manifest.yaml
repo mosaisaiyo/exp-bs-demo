@@ -1,0 +1,6 @@
+---
+applications:
+- name: mosaisaiyo
+  random-route: true
+  path: exp+bs+ang
+  memory: 256M

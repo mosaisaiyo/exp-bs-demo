@@ -9,7 +9,6 @@ var logger = require('morgan');
 var ejs = require('ejs');
 /*--
 var sessionStore = require("session-mongoose")(express);
-
 var store = new sessionStore({
   url: "mongodb://localhost/session",
   interval: 120000
