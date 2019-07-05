@@ -12,7 +12,7 @@
     <meta name="author" content="LayoutIt!">
 
     <!-- Bootstrap -->
-    <link href="/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/style.css" rel="stylesheet">
 
 </head>
@@ -21,7 +21,7 @@
 <!-- <script src="/controller/leaveRecord.js"></script> -->
 <!-- <script src="/javascripts/mosTable.js"></script> -->
 
-<script src="/javascripts/require.js" defer async="true" data-main="/javascripts/main"></script>
+
 
 <body ng-controller="recordCtrl">
     <!-- ng-app="leaveReqApp" -->
@@ -182,6 +182,8 @@
         </div>
 
     </div>
+
+    <script src="/lib/requireJS-2.3.6/require.js" defer async="true" data-main="/app/leaveReq/boot/main"></script>
 </body>
 
 </html>

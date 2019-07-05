@@ -1,3 +1,4 @@
+// 定义引导执行体
 define(['require',
     'angular',
 ], function(require, angular) {

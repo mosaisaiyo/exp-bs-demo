@@ -1,6 +1,7 @@
 /** moTable version 0.18
  *  This component can be easily help you to render <table> element in Bootstrap Page
  */
+
 define([], function() {
     var mosTable = function() {
 
@@ -66,7 +67,11 @@ define([], function() {
                 }
             }
         }
-
+        this.eventHandle = function(e) {
+            if(e!=undefined && e["data"]!=undefined) 
+                console.log(e.data.key+" ~ "+e.target.innerText);
+            return;
+        }
         this.init = function(name, data) {
 
             if (this._ui_object) {
@@ -126,6 +131,12 @@ define([], function() {
                             } else
                                 l_html = '<td>' + l_modal["items"][i][col] + '</td>';
                             o_tr.append(l_html);
+
+                            if(idx == 1) {
+                                var o_btn = o_tr.find("button").eq(0);
+                                var data = {key: o_tr[0]["_moskey"]};
+                                o_btn.click(data, this.eventHandle);
+                            }
                         }
                     }
                 }
