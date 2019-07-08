@@ -4,7 +4,7 @@ require.config({
         'jquery': '../../../lib/jquery-3.4.1/jquery.min',
         'bootstrap': '../../../lib/bootstrap-3.3.7/js/bootstrap.min',
         'angular': '../../../lib/angular-1.4.6/angular.min',
-        'leaveRec': '../controller/leaveRecord',
+        'repInfo': '../controller/d0010',
         'mosTable': '../../../javascripts/mosTable',
         'domReady': '../../../lib/domReady-2.0.1/domReady',
         'boot': 'boot',
@@ -28,6 +28,6 @@ require.config({
 });
 
 // 模块的加载
-require(['angular', 'leaveRec'], function(angular, app) {
+require(['angular', 'repInfo'], function(angular, app) {
     console.info(angular.version);
 });

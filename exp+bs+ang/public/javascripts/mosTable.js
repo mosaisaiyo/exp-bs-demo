@@ -68,8 +68,8 @@ define([], function() {
             }
         }
         this.eventHandle = function(e) {
-            if(e!=undefined && e["data"]!=undefined) 
-                console.log(e.data.key+" ~ "+e.target.innerText);
+            if (e != undefined && e["data"] != undefined)
+                console.log(e.data.key + " ~ " + e.target.innerText);
             return;
         }
         this.init = function(name, data) {
@@ -126,15 +126,15 @@ define([], function() {
 
                             idx++;
                             if (idx == 1) {
-                                l_html = '<td><button moscomp="mosBtn" class="btn btn-primary btn-sm">' + l_modal["items"][i][col] + '</button></td>';
+                                l_html = '<td><button moscomp="mosBtn" class="btn btn-primary btn-xs">' + l_modal["items"][i][col] + '</button></td>';
 
                             } else
                                 l_html = '<td>' + l_modal["items"][i][col] + '</td>';
                             o_tr.append(l_html);
 
-                            if(idx == 1) {
+                            if (idx == 1) {
                                 var o_btn = o_tr.find("button").eq(0);
-                                var data = {key: o_tr[0]["_moskey"]};
+                                var data = { key: o_tr[0]["_moskey"] };
                                 o_btn.click(data, this.eventHandle);
                             }
                         }
