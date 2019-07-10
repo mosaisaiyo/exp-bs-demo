@@ -126,7 +126,7 @@ define([], function() {
 
                             idx++;
                             if (idx == 1) {
-                                l_html = '<td><button moscomp="mosBtn" class="btn btn-primary btn-xs">' + l_modal["items"][i][col] + '</button></td>';
+                                l_html = '<td>' + l_modal["items"][i][col] + '<button moscomp="mosBtn" class="btn btn-primary btn-xs">查阅</button></td>';
 
                             } else
                                 l_html = '<td>' + l_modal["items"][i][col] + '</td>';
