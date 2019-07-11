@@ -2,16 +2,16 @@
  *  This component can be easily help you to render <table> element in Bootstrap Page
  */
 
-define([], function() {
-    var mosTable = function() {
+define([], function () {
+    var mosTable = function () {
 
-        this.initOData = function() {
+        this.initOData = function () {
             return { temp: { column: {}, items: [] } };
         }
 
         this.oData = this.initOData();
 
-        this.uuid = function() {
+        this.uuid = function () {
             var s = [];
             var hexDigits = "0123456789abcdef";
             for (var i = 0; i < 36; i++) {
@@ -25,7 +25,7 @@ define([], function() {
             return uuid;
         }
 
-        this.setModal = function(n, d) {
+        this.setModal = function (n, d) {
             this.oData = this.initOData();
             this.modalName = n;
             this.oData[n] = d;
@@ -34,45 +34,93 @@ define([], function() {
             }
         }
 
-        this.getModal = function(n) {
+        this.getModal = function (n) {
             return this.oData[n];
         }
 
-        this.refreshTableBody = function(n) {
-            var ui_tables = $("table[moscomp='mos_tab']");
-            for (var i = 0; i < ui_tables.length; i++) {
-                var ui_table = ui_tables.eq(i);
-                if (ui_table.length == 1 && ui_table[0]["_moskey"] == this._moskey) {
-                    var ui_body = ui_table.children().eq(1);
-                    ui_body.empty();
-                    ui_body.append('<tr></tr>');
-                    (function(o, m) {
-                        var l_html = "";
-                        if (o.children().eq(1)[0].tagName == "TBODY") {
-                            for (var i = 0; i < m["items"].length; i++) {
-                                var o_tr = o.children().eq(1).find('tr').last();
-                                if (o_tr.children().length > 0) {
-                                    o.children().eq(1).append('<tr></tr>');
-                                    o_tr = o.children().eq(1).find('tr').last();
-                                }
-                                o_tr[0]["_moskey"] = m["items"][i]["_moskey"];
-                                o_tr[0]["_mosdata"] = m["items"][i];
-                                for (var col in m["column"]) {
-                                    l_html = '<td>' + m["items"][i][col] + '</td>';
-                                    o_tr.append(l_html);
-                                }
-                            }
-                        }
-                    })(ui_table, this.oData[n]);
+        this.removeTableBodyRows = function () {
+
+            var n = $("table[moscomp='mos_tab']");
+            var o = undefined;
+
+            for (var i = 0; i < n.length; i++) {
+                if (n.eq(i).attr('mosdata') == this.modalName) {
+                    o = n.eq(i);
+                    break;
                 }
             }
+
+            if (o == undefined)
+                return;
+
+            var ui_body = o.children().eq(1);
+            ui_body.empty();
+            ui_body.append('<tr></tr>');
+
+            return;
         }
-        this.eventHandle = function(e) {
+
+        this.eventHandle = function (e) {
             if (e != undefined && e["data"] != undefined)
                 console.log(e.data.key + " ~ " + e.target.innerText);
             return;
         }
-        this.init = function(name, data) {
+
+        this.refreshTableBodyRows = function (name, data, cfg) {
+
+            this.setModal(name, data);
+
+            var n = $("table[moscomp='mos_tab']");
+            var o = undefined;
+
+            for (var i = 0; i < n.length; i++) {
+                if (n.eq(i).attr('mosdata') == this.modalName) {
+                    o = n.eq(i);
+                    break;
+                }
+            }
+
+            if (o == undefined) return;
+
+            var l_data = o.attr("mosdata");
+            var l_modal = this.getModal(l_data);
+            var l_html = "";
+
+            if (o.children().eq(1)[0].tagName == "TBODY") {
+                for (var i = 0; i < l_modal["items"].length; i++) {
+                    var o_tr = o.children().eq(1).find('tr').last();
+                    if (o_tr.children().length > 0) {
+                        o.children().eq(1).append('<tr></tr>');
+                        o_tr = o.children().eq(1).find('tr').last();
+                    }
+                    o_tr[0]["_moskey"] = l_modal["items"][i]["_moskey"];
+                    o_tr[0]["_mosdata"] = l_modal["items"][i];
+                    var idx = 0;
+                    for (var col in l_modal["column"]) {
+
+                        idx++;
+                        if (idx == 1) {
+                            if (cfg != undefined && cfg["fstColBtn"] == true)
+                                l_html = '<td>' + l_modal["items"][i][col] + '&nbsp&nbsp<button moscomp="mosBtn" class="btn btn-primary btn-xs">' + cfg["fstColBtnTxt"] + '</button></td>';
+                            else
+                                l_html = '<td>' + l_modal["items"][i][col] + '</td>';
+                        } else
+                            l_html = '<td>' + l_modal["items"][i][col] + '</td>';
+                        o_tr.append(l_html);
+
+                        if (idx == 1) {
+                            var o_btn = o_tr.find("button").eq(0);
+                            var data = { key: o_tr[0]["_moskey"] };
+                            o_btn.click(data, this.eventHandle);
+                        }
+                    }
+                }
+            }
+
+            return;
+        }
+
+        this.init = function (name, data, cfg) {
 
             if (this._ui_object) {
                 return;
@@ -126,8 +174,10 @@ define([], function() {
 
                             idx++;
                             if (idx == 1) {
-                                l_html = '<td>' + l_modal["items"][i][col] + '<button moscomp="mosBtn" class="btn btn-primary btn-xs">查阅</button></td>';
-
+                                if (cfg != undefined && cfg["fstColBtn"] == true)
+                                    l_html = '<td>' + l_modal["items"][i][col] + '&nbsp&nbsp<button moscomp="mosBtn" class="btn btn-primary btn-xs">' + cfg["fstColBtnTxt"] + '</button></td>';
+                                else
+                                    l_html = '<td>' + l_modal["items"][i][col] + '</td>';
                             } else
                                 l_html = '<td>' + l_modal["items"][i][col] + '</td>';
                             o_tr.append(l_html);
