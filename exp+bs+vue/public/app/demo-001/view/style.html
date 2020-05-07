@@ -37,10 +37,10 @@
                 <div class="col-xs-12">
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
-                            <tr v-bind:class="[colType]">
-                                <td class="info">Col-1</td>
-                                <td class="danger">Col-2</td>
-                                <td v-bind:class="[colType]">Col-3</td>
+                            <tr>
+                                <td v-bind:class="[colType1]">Col-1</td>
+                                <td v-bind:class="[colType2]">Col-2</td>
+                                <td v-bind:class="[colType3]">Col-3</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,7 +66,7 @@
         <p>
 
         </p>
-        
+
         <div class="container.fruid">
             <div class="row">
                 <form>
@@ -89,26 +89,31 @@
         </div>
 
         <div class="container.fruid">
-            <select class="form-control col-xs-2" v-model="selected">
-                <option v-for="option in options" v-bind:value="option.value">
-                    {{ option.text }}
-                </option>
-            </select>
-            <p></p>
-            <span>Selected: {{ selected }}</span>
+            <div class="row">
+                <div class="col-xs-2">
+                    <select class="form-control" v-model="selected">
+                        <option v-for="option in options" v-bind:value="option.value">
+                            {{ option.text }}
+                        </option>
+                    </select>
+                    <p></p>
+                    <span>Selected: {{ selected }}</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <span></span>
+    <div class="container.fruid">
+        <div id="components-demo">
+            <div class="row">
+                <div class="col-xs-3">
 
-    <div id="components-demo">
-        <div class="row col-xs-12">
-            <div class="col-xs-3">
-                <button-counter></button-counter>
+                    <button-counter></button-counter>
+
+                </div>
             </div>
-
         </div>
-
     </div>
 
     <script src="/app/demo-001/controller/style.js"></script>

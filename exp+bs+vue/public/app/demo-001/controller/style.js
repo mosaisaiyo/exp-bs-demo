@@ -1,7 +1,9 @@
 var app = new Vue({
     el: '#app',
     data: {
-        colType: 'success',
+        colType1: 'active',
+        colType2: 'success',
+        colType3: 'warning',
         freeText: 'Hello world',
         list: ["one", "two", "three","four","five","six","seven","eight"],
         colorIdx: 0,
@@ -23,6 +25,7 @@ var app = new Vue({
                 this.colorIdx = 0;
             }
             this.colType = this.colorList[this.colorIdx];
+            
             if (this.freeText === 'Hello world') {
                 this.freeText = 'Haha...';
             } else {
